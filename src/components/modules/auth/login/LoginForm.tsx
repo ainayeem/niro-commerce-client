@@ -3,16 +3,15 @@ import Logo from "@/app/assets/svgs/Logo";
 import { Button } from "@/components/ui/button";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { loginUser, reCaptchaTokenVerification } from "@/services/AuthService";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
+import { useRouter, useSearchParams } from "next/navigation";
+import { useState } from "react";
 import ReCAPTCHA from "react-google-recaptcha";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
-// import { loginUser, reCaptchaTokenVerification } from "@/services/AuthService";
-import { loginUser, reCaptchaTokenVerification } from "@/services/AuthService";
-import { useState } from "react";
 import { toast } from "sonner";
 import { loginSchema } from "./loginValidation";
-// import { useState } from "react";
 
 export default function LoginForm() {
   const form = useForm({
@@ -20,6 +19,10 @@ export default function LoginForm() {
   });
 
   const [reCaptchaStatus, setReCaptchaStatus] = useState(false);
+
+  const searchParams = useSearchParams();
+  const redirect = searchParams.get("redirectPath");
+  const router = useRouter();
 
   const {
     formState: { isSubmitting },
@@ -41,6 +44,11 @@ export default function LoginForm() {
       const res = await loginUser(data);
       if (res?.success) {
         toast.success(res?.message);
+        if (redirect) {
+          router.push(redirect);
+        } else {
+          router.push("/profile");
+        }
       } else {
         toast.error(res?.message);
       }
@@ -88,7 +96,7 @@ export default function LoginForm() {
           />
 
           <div className="flex mt-3 w-full">
-            <ReCAPTCHA sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_CLIENT_KEY as string} onChange={handleReCaptcha} className="mx-auto" />
+            <ReCAPTCHA sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_CLIENT_KEY!} onChange={handleReCaptcha} className="mx-auto" />
           </div>
 
           <Button disabled={reCaptchaStatus ? false : true} type="submit" className="mt-5 w-full">

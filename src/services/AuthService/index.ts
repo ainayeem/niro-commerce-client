@@ -48,7 +48,7 @@ export const loginUser = async (userData: FieldValues) => {
 };
 
 export const getCurrentUser = async () => {
-  const accessToken = (await cookies()).get("accessToken")!.value;
+  const accessToken = (await cookies()).get("accessToken")?.value;
   let decodedData = null;
 
   if (accessToken) {
@@ -58,6 +58,22 @@ export const getCurrentUser = async () => {
     return null;
   }
 };
+// export const getCurrentUser = async () => {
+//   const cookie = await cookies();
+//   const accessToken = cookie.get("accessToken")?.value;
+
+//   if (!accessToken) {
+//     return null;
+//   }
+
+//   try {
+//     const decodedData = await jwtDecode(accessToken);
+//     return decodedData;
+//   } catch (error) {
+//     console.error("Failed to decode access token:", error);
+//     return null;
+//   }
+// };
 
 export const reCaptchaTokenVerification = async (token: string) => {
   try {
@@ -76,4 +92,8 @@ export const reCaptchaTokenVerification = async (token: string) => {
   } catch (err: any) {
     return Error(err);
   }
+};
+
+export const logout = async () => {
+  (await cookies()).delete("accessToken");
 };

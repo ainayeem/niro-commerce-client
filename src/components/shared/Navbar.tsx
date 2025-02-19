@@ -1,8 +1,36 @@
+"use client";
+
 import Logo from "@/app/assets/svgs/Logo";
-import { Heart, ShoppingBag } from "lucide-react";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { protectedRoutes } from "@/constants";
+import { useUser } from "@/context/UserContext";
+import { logout } from "@/services/AuthService";
+import { Heart, LogOut, ShoppingBag } from "lucide-react";
+import Link from "next/link";
+import { usePathname, useRouter } from "next/navigation";
 import { Button } from "../ui/button";
 
 export default function Navbar() {
+  const { user, setIsLoading } = useUser();
+  const pathname = usePathname();
+  const router = useRouter();
+
+  const handleLogOut = () => {
+    logout();
+    setIsLoading(true);
+    if (protectedRoutes.some((route) => pathname.match(route))) {
+      router.push("/");
+    }
+  };
+
   return (
     <header className="border-b w-full">
       <div className="container flex justify-between items-center mx-auto h-16 px-3">
@@ -24,6 +52,41 @@ export default function Navbar() {
           <Button variant="outline" className="rounded-full p-0 size-10">
             <ShoppingBag />
           </Button>
+
+          {user ? (
+            <>
+              <Link href="/create-shop">
+                <Button className="rounded-full">Create Shop</Button>
+              </Link>
+
+              <DropdownMenu>
+                <DropdownMenuTrigger>
+                  <Avatar>
+                    <AvatarImage src="https://github.com/shadcn.png" />
+                    <AvatarFallback>User</AvatarFallback>
+                  </Avatar>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent>
+                  <DropdownMenuLabel>My Account</DropdownMenuLabel>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem>Profile</DropdownMenuItem>
+                  <DropdownMenuItem>Dashboard</DropdownMenuItem>
+                  <DropdownMenuItem>My Shop</DropdownMenuItem>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem className="bg-red-100 text-red-600 cursor-pointer font-semibold" onClick={handleLogOut}>
+                    <LogOut />
+                    <span>Log Out</span>
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            </>
+          ) : (
+            <Link href="/login">
+              <Button className="rounded-full" variant="outline">
+                Login
+              </Button>
+            </Link>
+          )}
         </nav>
       </div>
     </header>
