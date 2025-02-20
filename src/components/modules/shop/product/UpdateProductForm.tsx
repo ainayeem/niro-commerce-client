@@ -1,6 +1,6 @@
 "use client";
 
-import Logo from "@/app/assets/svgs/Logo";
+import Logo from "@/assets/svgs/Logo";
 import { Button } from "@/components/ui/button";
 import NCImageUploader from "@/components/ui/core/NCImageUploader";
 import ImagePreviewer from "@/components/ui/core/NCImageUploader/ImagePreviewer";

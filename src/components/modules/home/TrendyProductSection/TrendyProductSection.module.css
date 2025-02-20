@@ -1,0 +1,7 @@
+.bgViolate {
+  background: url("../../../../assets/v-bg.png");
+  /* height: 500px; */
+  background-size: cover;
+  /* background-position: center; */
+  background-repeat: no-repeat;
+}

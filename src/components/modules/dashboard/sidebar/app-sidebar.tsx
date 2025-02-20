@@ -1,11 +1,10 @@
 "use client";
 
-import { Bot, Frame, LifeBuoy, Map, PieChart, Send, Settings, SquareTerminal } from "lucide-react";
-import * as React from "react";
-
-import Logo from "@/app/assets/svgs/Logo";
+import Logo from "@/assets/svgs/Logo";
 import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from "@/components/ui/sidebar";
+import { Bot, Frame, LifeBuoy, Map, PieChart, Send, Settings, SquareTerminal } from "lucide-react";
 import Link from "next/link";
+import * as React from "react";
 import { NavMain } from "./nav-main";
 import { NavUser } from "./nav-user";
 

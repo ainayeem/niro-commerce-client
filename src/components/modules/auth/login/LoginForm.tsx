@@ -1,5 +1,6 @@
 "use client";
-import Logo from "@/app/assets/svgs/Logo";
+
+import Logo from "@/assets/svgs/Logo";
 import { Button } from "@/components/ui/button";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";

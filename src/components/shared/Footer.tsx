@@ -1,4 +1,4 @@
-import Logo from "@/app/assets/svgs/Logo";
+import Logo from "@/assets/svgs/Logo";
 import { Facebook, Instagram, X } from "lucide-react";
 import Link from "next/link";
 
@@ -29,8 +29,7 @@ const Footer = () => {
             </h1>
           </div>
           <p className="text-gray-600 mt-3 w-1/2">
-            Shop the best deals on electronics, fashion, home essentials, and
-            more. Fast shipping & secure payments.
+            Shop the best deals on electronics, fashion, home essentials, and more. Fast shipping & secure payments.
           </p>
         </div>
 
@@ -47,11 +46,7 @@ const Footer = () => {
 
         <div className="flex justify-center space-x-4">
           {socialLinks.map(({ href, icon: Icon }, index) => (
-            <Link
-              href={href}
-              key={index}
-              className="text-gray-600 hover:text-emerald-600"
-            >
+            <Link href={href} key={index} className="text-gray-600 hover:text-emerald-600">
               <Icon className="w-5 h-5" />
             </Link>
           ))}

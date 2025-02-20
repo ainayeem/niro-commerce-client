@@ -1,6 +1,6 @@
 "use client";
 
-import Logo from "@/app/assets/svgs/Logo";
+import Logo from "@/assets/svgs/Logo";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
   DropdownMenu,
@@ -34,9 +34,9 @@ export default function Navbar() {
   return (
     <header className="border-b w-full">
       <div className="container flex justify-between items-center mx-auto h-16 px-3">
-        <h1 className="text-2xl font-black flex items-center gap-2">
+        <h1 className="text-2xl flex items-center gap-2 font-bold text-emerald-600">
           <Logo />
-          Niro Com
+          Nirocom
         </h1>
         <div className="max-w-md  flex-grow">
           <input
