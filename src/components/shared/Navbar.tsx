@@ -32,7 +32,7 @@ export default function Navbar() {
   };
 
   return (
-    <header className="border-b w-full">
+    <header className="border-b w-full sticky top-0 z-10 bg-gray-200/60">
       <div className="container flex justify-between items-center mx-auto h-16 px-3">
         <h1 className="text-2xl flex items-center gap-2 font-bold text-emerald-600">
           <Logo />
@@ -70,7 +70,9 @@ export default function Navbar() {
                   <DropdownMenuLabel>My Account</DropdownMenuLabel>
                   <DropdownMenuSeparator />
                   <DropdownMenuItem>Profile</DropdownMenuItem>
-                  <DropdownMenuItem>Dashboard</DropdownMenuItem>
+                  <DropdownMenuItem>
+                    <Link href={`/${user?.role}/dashboard`}>Dashboard</Link>
+                  </DropdownMenuItem>{" "}
                   <DropdownMenuItem>My Shop</DropdownMenuItem>
                   <DropdownMenuSeparator />
                   <DropdownMenuItem className="bg-red-100 text-red-600 cursor-pointer font-semibold" onClick={handleLogOut}>

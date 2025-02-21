@@ -30,11 +30,11 @@ const ProductCard = ({ product }: { product: IProduct }) => {
           <p className="text-sm text-gray-600">
             {product?.offerPrice ? (
               <>
-                <span className="font-semibold mr-2 text-orange-400">$ {product?.offerPrice}</span>
-                <del className="font-semibold text-xs">$ {product?.price}</del>
+                <span className="font-semibold mr-2 text-orange-400">$ {product?.offerPrice.toFixed(2)}</span>
+                <del className="font-semibold text-xs">$ {product?.price.toFixed(2)}</del>
               </>
             ) : (
-              <span className="font-semibold">$ {product?.price}</span>
+              <span className="font-semibold">$ {product?.price.toFixed(2)}</span>
             )}
           </p>
 

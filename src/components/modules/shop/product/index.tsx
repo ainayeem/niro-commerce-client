@@ -1,21 +1,27 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
+import { Checkbox } from "@/components/ui/checkbox";
 import DeleteConfirmationModal from "@/components/ui/core/NCModal/DeleteConfirmationModal";
 import { NCTable } from "@/components/ui/core/NCTable";
+import TablePagination from "@/components/ui/core/NCTable/TablePagination";
 import { deleteProduct } from "@/services/ProductService";
-import { IProduct } from "@/types";
+import { IMeta, IProduct } from "@/types";
 import { ColumnDef } from "@tanstack/react-table";
 import { Edit, Eye, Plus, Trash } from "lucide-react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { toast } from "sonner";
+import DiscountModal from "./DiscountModal";
 
-const ManageProducts = ({ products }: { products: IProduct[] }) => {
+const ManageProducts = ({ products, meta }: { products: IProduct[]; meta: IMeta }) => {
   const [isModalOpen, setModalOpen] = useState(false);
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [selectedItem, setSelectedItem] = useState<string | null>(null);
+
+  const [selectedIds, setSelectedIds] = useState<string[] | []>([]);
+
   const router = useRouter();
 
   const handleView = (product: IProduct) => {
@@ -46,6 +52,34 @@ const ManageProducts = ({ products }: { products: IProduct[] }) => {
   };
 
   const columns: ColumnDef<IProduct>[] = [
+    // select
+    {
+      id: "select",
+      header: ({ table }) => (
+        <Checkbox
+          checked={table.getIsAllPageRowsSelected() || (table.getIsSomePageRowsSelected() && "indeterminate")}
+          onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
+          aria-label="Select all"
+        />
+      ),
+      cell: ({ row }) => (
+        <Checkbox
+          checked={row.getIsSelected()}
+          onCheckedChange={(value) => {
+            if (value) {
+              setSelectedIds((prev) => [...prev, row.original._id]);
+            } else {
+              setSelectedIds(selectedIds.filter((id) => id !== row.original._id));
+            }
+            row.toggleSelected(!!value);
+          }}
+          aria-label="Select row"
+        />
+      ),
+      enableSorting: false,
+      enableHiding: false,
+    },
+
     {
       accessorKey: "name",
       header: "Product Name",
@@ -114,9 +148,11 @@ const ManageProducts = ({ products }: { products: IProduct[] }) => {
           <Button onClick={() => router.push("/user/shop/products/add-product")} size="sm">
             Add Product <Plus />
           </Button>
+          <DiscountModal selectedIds={selectedIds} setSelectedIds={setSelectedIds} />
         </div>
       </div>
       <NCTable columns={columns} data={products || []} />
+      <TablePagination totalPage={meta?.totalPage} />
 
       <DeleteConfirmationModal name={selectedItem} isOpen={isModalOpen} onOpenChange={setModalOpen} onConfirm={handleDeleteConfirm} />
     </div>
