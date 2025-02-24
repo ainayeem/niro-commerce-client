@@ -34,10 +34,12 @@ export default function Navbar() {
   return (
     <header className="border-b w-full sticky top-0 z-10 bg-gray-200/60">
       <div className="container flex justify-between items-center mx-auto h-16 px-3">
-        <h1 className="text-2xl flex items-center gap-2 font-bold text-emerald-600">
-          <Logo />
-          Nirocom
-        </h1>
+        <Link href="/">
+          <h1 className="text-2xl flex items-center gap-2 font-bold text-emerald-600">
+            <Logo />
+            Nirocom
+          </h1>
+        </Link>
         <div className="max-w-md  flex-grow">
           <input
             type="text"
@@ -49,9 +51,11 @@ export default function Navbar() {
           <Button variant="outline" className="rounded-full p-0 size-10">
             <Heart />
           </Button>
-          <Button variant="outline" className="rounded-full p-0 size-10">
-            <ShoppingBag />
-          </Button>
+          <Link href="/cart">
+            <Button variant="outline" className="rounded-full p-0 size-10">
+              <ShoppingBag />
+            </Button>
+          </Link>
 
           {user ? (
             <>
