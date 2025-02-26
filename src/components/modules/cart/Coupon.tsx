@@ -3,11 +3,18 @@
 import { Button } from "@/components/ui/button";
 import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { couponSelector, fetchCoupon, shopSelector, subTotalSelector } from "@/redux/features/cartSlice";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { Trash } from "lucide-react";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { toast } from "sonner";
 
 export default function Coupon() {
+  const subTotal = useAppSelector(subTotalSelector);
+  const shopId = useAppSelector(shopSelector);
+  const { isLoading, code, error } = useAppSelector(couponSelector);
+  const dispatch = useAppDispatch();
+
   const form = useForm();
 
   const couponInput = form.watch("coupon");
@@ -18,7 +25,13 @@ export default function Coupon() {
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     try {
-      console.log(data);
+      // console.log(data);
+      // const res = await addCoupon(data.coupon, subTotal, shopId);
+      // console.log("🚀 ~ constonSubmit:SubmitHandler<FieldValues>= ~ res:", res);
+
+      // redux thunk
+      const res = await dispatch(fetchCoupon({ couponCode: data.coupon, subTotal, shopId })).unwrap();
+      console.log(res, "inside component"); //
     } catch (error: any) {
       console.log(error);
       toast.error(error.message);
@@ -46,7 +59,7 @@ export default function Coupon() {
             />
             <div className="flex gap-3 mt-3">
               <Button disabled={!couponInput} type="submit" className="w-full text-xl font-semibold py-5 ">
-                Apply
+                {isLoading ? "Applying..." : "Apply"}
               </Button>
               {couponInput && (
                 <Button onClick={handleRemoveCoupon} variant="outline" className="bg-red-100 rounded-full size-10">
