@@ -7,6 +7,8 @@ import {
   cartProductsSelector,
   citySelector,
   clearCart,
+  couponSelector,
+  discountAmountSelector,
   grandTotalSelector,
   orderSelector,
   shippingAddressSelector,
@@ -21,11 +23,13 @@ import { toast } from "sonner";
 export default function PaymentDetails() {
   const subTotal = useAppSelector(subTotalSelector);
   const shippingCost = useAppSelector(shippingCostSelector);
+  const discountAmount = useAppSelector(discountAmountSelector);
   const grandTotal = useAppSelector(grandTotalSelector);
   const order = useAppSelector(orderSelector);
   const city = useAppSelector(citySelector);
   const shippingAddress = useAppSelector(shippingAddressSelector);
   const cartProducts = useAppSelector(cartProductsSelector);
+  const coupon = useAppSelector(couponSelector);
 
   const user = useUser();
 
@@ -52,8 +56,14 @@ export default function PaymentDetails() {
         throw new Error("Cart is empty");
       }
 
-      const res = await createOrder(order);
-      console.log("🚀 ~ handleOrder ~ order:", order);
+      let orderData;
+      if (coupon.code) {
+        orderData = { ...order, coupon: coupon.code };
+      } else {
+        orderData = order;
+      }
+
+      const res = await createOrder(orderData);
 
       if (res.success) {
         toast.success(res.message, { id: orderLoading });
@@ -79,7 +89,7 @@ export default function PaymentDetails() {
         </div>
         <div className="flex justify-between">
           <p className="text-gray-500 ">Discount</p>
-          <p className="font-semibold">{currencyFormatter(0)}</p>
+          <p className="font-semibold">{currencyFormatter(discountAmount)}</p>
         </div>
         <div className="flex justify-between">
           <p className="text-gray-500 ">Shipment Cost</p>

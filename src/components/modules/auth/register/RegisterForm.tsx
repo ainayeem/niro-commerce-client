@@ -4,6 +4,7 @@ import Logo from "@/assets/svgs/Logo";
 import { Button } from "@/components/ui/button";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { useUser } from "@/context/UserContext";
 import { registerUser } from "@/services/AuthService";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
@@ -16,6 +17,8 @@ export default function RegisterForm() {
     resolver: zodResolver(registrationSchema),
   });
 
+  const { setIsLoading } = useUser();
+
   const {
     formState: { isSubmitting },
   } = form;
@@ -27,6 +30,9 @@ export default function RegisterForm() {
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     try {
       const res = await registerUser(data);
+
+      setIsLoading(true);
+
       if (res?.success) {
         toast.success(res?.message);
       } else {

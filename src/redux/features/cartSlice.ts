@@ -178,8 +178,9 @@ export const shippingCostSelector = (state: RootState) => {
 export const grandTotalSelector = (state: RootState) => {
   const subTotal = subTotalSelector(state);
   const shippingCost = shippingCostSelector(state);
+  const discountAmount = discountAmountSelector(state);
 
-  return subTotal + shippingCost;
+  return subTotal - discountAmount + shippingCost;
 };
 
 export const couponSelector = (state: RootState) => {

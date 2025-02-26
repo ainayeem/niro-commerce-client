@@ -52,7 +52,7 @@ export default function Coupon() {
               render={({ field }) => (
                 <FormItem>
                   <FormControl>
-                    <Input {...field} className="rounded-full" placeholder="Promo / Coupon code" value={field.value} />
+                    <Input {...field} className="rounded-full" placeholder="Promo / Coupon code" value={field.value || ""} />
                   </FormControl>
                 </FormItem>
               )}
