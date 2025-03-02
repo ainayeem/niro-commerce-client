@@ -46,8 +46,8 @@ const ManageProducts = ({ products, meta }: { products: IProduct[]; meta: IMeta 
           toast.error(res.message);
         }
       }
-    } catch (err: any) {
-      console.error(err?.message);
+    } catch (err) {
+      console.error((err as Error)?.message);
     }
   };
 

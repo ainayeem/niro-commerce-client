@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use server";
 import { getValidToken } from "@/lib/verifyAccessToken";
 import { revalidateTag } from "next/cache";
@@ -33,8 +34,8 @@ export const getAllProducts = async (
     });
     const data = await res.json();
     return data;
-  } catch (error: any) {
-    return Error(error.message);
+  } catch (error) {
+    return Error((error as Error).message);
   }
 };
 
@@ -48,8 +49,8 @@ export const getSingleProduct = async (productId: string) => {
     });
     const data = await res.json();
     return data;
-  } catch (error: any) {
-    return Error(error.message);
+  } catch (error) {
+    return Error((error as Error).message);
   }
 };
 
@@ -67,8 +68,8 @@ export const addProduct = async (productData: FormData): Promise<any> => {
     });
     revalidateTag("PRODUCT");
     return res.json();
-  } catch (error: any) {
-    return Error(error);
+  } catch (error) {
+    return Error((error as Error).message);
   }
 };
 
@@ -86,8 +87,8 @@ export const updateProduct = async (productData: FormData, productId: string): P
     });
     revalidateTag("PRODUCT");
     return res.json();
-  } catch (error: any) {
-    return Error(error);
+  } catch (error) {
+    return Error((error as Error).message);
   }
 };
 
@@ -104,7 +105,7 @@ export const deleteProduct = async (productId: string): Promise<any> => {
     });
     revalidateTag("PRODUCT");
     return res.json();
-  } catch (error: any) {
-    return Error(error);
+  } catch (error) {
+    return Error((error as Error).message);
   }
 };

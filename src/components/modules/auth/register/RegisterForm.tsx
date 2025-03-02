@@ -38,7 +38,7 @@ export default function RegisterForm() {
       } else {
         toast.error(res?.message);
       }
-    } catch (err: any) {
+    } catch (err) {
       console.error(err);
     }
   };

@@ -5,6 +5,7 @@ import { Minus, Plus, Trash } from "lucide-react";
 import Image from "next/image";
 
 export default function CartProductCard({ product }: { product: CartProduct }) {
+  // console.log("🚀 ~ CartProductCard ~ product:", product);
   const dispatch = useAppDispatch();
 
   const handleIncrementQuantity = (id: string) => {

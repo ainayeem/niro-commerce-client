@@ -38,7 +38,7 @@ export default function LoginForm() {
       if (res?.success) {
         setReCaptchaStatus(true);
       }
-    } catch (err: any) {
+    } catch (err) {
       console.error(err);
     }
   };
@@ -54,12 +54,12 @@ export default function LoginForm() {
         if (redirect) {
           router.push(redirect);
         } else {
-          router.push("/profile");
+          router.push("/");
         }
       } else {
         toast.error(res?.message);
       }
-    } catch (err: any) {
+    } catch (err) {
       console.error(err);
     }
   };

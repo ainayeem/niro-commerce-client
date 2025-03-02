@@ -6,7 +6,7 @@ import { IProduct } from "@/types";
 import Link from "next/link";
 
 const FeaturedProducts = async () => {
-  const { data: products } = await getAllProducts();
+  const { data: products = [] } = await getAllProducts();
 
   return (
     <div className="bg-white bg-opacity-50 py-10">
@@ -22,8 +22,8 @@ const FeaturedProducts = async () => {
           </div>
 
           <div className="grid grid-cols-5 gap-8 my-5">
-            {products.slice(0, 5).map((product: IProduct, idx: number) => (
-              <ProductCard key={idx} product={product} />
+            {products.slice(0, 5).map((product: IProduct) => (
+              <ProductCard key={product._id} product={product} />
             ))}
           </div>
         </div>

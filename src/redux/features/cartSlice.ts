@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { addCoupon } from "@/services/cart";
 import { IProduct } from "@/types";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
@@ -33,23 +34,20 @@ const initialState: InitialState = {
   },
 };
 
-export const fetchCoupon = createAsyncThunk(
-  "cart/fetchCoupon",
-  async ({ couponCode, subTotal, shopId }: { couponCode: string; subTotal: number; shopId: string }) => {
-    try {
-      const res = await addCoupon(couponCode, subTotal, shopId);
+export const fetchCoupon = createAsyncThunk<any, any, any>("cart/fetchCoupon", async ({ couponCode, subTotal, shopId }) => {
+  try {
+    const res = await addCoupon(couponCode, subTotal, shopId);
 
-      if (!res.success) {
-        throw new Error(res.message);
-      }
-
-      return res;
-    } catch (err: any) {
-      console.log(err);
-      throw new Error(err.message);
+    if (!res.success) {
+      throw new Error(res.message);
     }
+
+    return res;
+  } catch (err) {
+    console.log(err);
+    throw new Error((err as Error).message);
   }
-);
+});
 
 const cartSlice = createSlice({
   name: "cart",
@@ -113,6 +111,7 @@ const cartSlice = createSlice({
 
   // extra reducer
   extraReducers: (builder) => {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     builder.addCase(fetchCoupon.pending, (state, action) => {
       // console.log("🚀 ~ builder.addCase ~ action:pending", action);
       state.coupon.isLoading = true;

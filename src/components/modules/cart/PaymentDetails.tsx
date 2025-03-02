@@ -74,8 +74,8 @@ export default function PaymentDetails() {
       if (!res.success) {
         toast.error(res.message, { id: orderLoading });
       }
-    } catch (error: any) {
-      toast.error(error.message, { id: orderLoading });
+    } catch (error) {
+      toast.error((error as Error).message, { id: orderLoading });
     }
   };
 

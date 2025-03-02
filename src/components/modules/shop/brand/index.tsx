@@ -35,8 +35,8 @@ const ManageBrands = ({ brands }: { brands: IBrand[] }) => {
           toast.error(res.message);
         }
       }
-    } catch (err: any) {
-      console.error(err?.message);
+    } catch (err) {
+      console.error((err as Error)?.message);
     }
   };
 

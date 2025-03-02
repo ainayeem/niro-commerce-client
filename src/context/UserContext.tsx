@@ -1,5 +1,6 @@
 import { getCurrentUser } from "@/services/AuthService";
-import { IUser } from "@/types";
+import { IUser } from "@/types/user";
+
 import { createContext, Dispatch, SetStateAction, useContext, useEffect, useState } from "react";
 
 interface IUserProviderValues {

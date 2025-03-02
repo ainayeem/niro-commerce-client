@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use server";
 import { getValidToken } from "@/lib/verifyAccessToken";
 import { revalidateTag } from "next/cache";
@@ -18,8 +19,8 @@ export const addFlashSale = async (productData: any): Promise<any> => {
 
     revalidateTag("PRODUCT");
     return res.json();
-  } catch (error: any) {
-    return Error(error);
+  } catch (error) {
+    return Error((error as Error).message);
   }
 };
 
@@ -33,7 +34,7 @@ export const getFlashSaleProducts = async () => {
     });
     const data = await res.json();
     return data;
-  } catch (error: any) {
-    return Error(error.message);
+  } catch (error) {
+    return Error((error as Error).message);
   }
 };

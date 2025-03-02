@@ -7,7 +7,7 @@ import Link from "next/link";
 import CountDown from "./CountDown";
 
 const FlashSale = async () => {
-  const { data: products } = await getFlashSaleProducts();
+  const { data: products = [] } = await getFlashSaleProducts();
 
   return (
     <div className=" bg-white bg-opacity-50 pt-6 pb-8">
@@ -25,8 +25,8 @@ const FlashSale = async () => {
           </Link>
         </div>
         <div className="grid grid-cols-4 gap-4 mt-10">
-          {products?.slice(0, 4)?.map((product: IProduct, idx: number) => (
-            <ProductCard key={idx} product={product} />
+          {products?.slice(0, 4)?.map((product: IProduct) => (
+            <ProductCard key={product._id} product={product} />
           ))}
         </div>
       </NCContainer>

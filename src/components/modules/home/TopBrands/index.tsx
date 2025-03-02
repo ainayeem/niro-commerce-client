@@ -6,7 +6,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 const TopBrands = async () => {
-  const { data: brands } = await getAllBrands();
+  const { data: brands = [] } = await getAllBrands();
 
   return (
     <NCContainer className="my-36">
@@ -19,8 +19,8 @@ const TopBrands = async () => {
         </Link>
       </div>
       <div className="grid grid-cols-4 gap-6 my-10 ">
-        {brands?.slice(0, 8)?.map((brand: IBrand, idx: number) => (
-          <div className="bg-white p-3 rounded-xl" key={idx}>
+        {brands?.slice(0, 8)?.map((brand: IBrand) => (
+          <div className="bg-white p-3 rounded-xl" key={brand._id}>
             <div className="bg-gray-100 p-2 rounded-md h-20 w-full">
               <Image src={brand?.logo} width={50} height={50} alt="category icon" className="mx-auto h-full w-full object-contain" />
             </div>

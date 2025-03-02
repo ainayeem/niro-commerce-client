@@ -21,8 +21,8 @@ export const registerUser = async (userData: FieldValues) => {
     }
 
     return result;
-  } catch (error: any) {
-    return Error(error);
+  } catch (error) {
+    return Error((error as Error).message);
   }
 };
 
@@ -44,8 +44,8 @@ export const loginUser = async (userData: FieldValues) => {
     }
 
     return result;
-  } catch (error: any) {
-    return Error(error);
+  } catch (error) {
+    return Error((error as Error).message);
   }
 };
 
@@ -91,8 +91,8 @@ export const reCaptchaTokenVerification = async (token: string) => {
     });
 
     return res.json();
-  } catch (err: any) {
-    return Error(err);
+  } catch (error) {
+    return Error((error as Error).message);
   }
 };
 
@@ -111,7 +111,7 @@ export const getNewAccessToken = async () => {
     });
 
     return res.json();
-  } catch (error: any) {
-    return Error(error);
+  } catch (error) {
+    return Error((error as Error).message);
   }
 };

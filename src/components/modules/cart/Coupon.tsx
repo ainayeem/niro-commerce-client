@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import { Button } from "@/components/ui/button";
@@ -12,7 +13,10 @@ import { toast } from "sonner";
 export default function Coupon() {
   const subTotal = useAppSelector(subTotalSelector);
   const shopId = useAppSelector(shopSelector);
-  const { isLoading, code, error } = useAppSelector(couponSelector);
+  const {
+    isLoading,
+    // code, error
+  } = useAppSelector(couponSelector);
   const dispatch = useAppDispatch();
 
   const form = useForm();
@@ -30,11 +34,11 @@ export default function Coupon() {
       // console.log("🚀 ~ constonSubmit:SubmitHandler<FieldValues>= ~ res:", res);
 
       // redux thunk
-      const res = await dispatch(fetchCoupon({ couponCode: data.coupon, subTotal, shopId })).unwrap();
+      const res = await dispatch(fetchCoupon({ couponCode: data.coupon, subTotal, shopId }) as any).unwrap();
       console.log(res, "inside component"); //
-    } catch (error: any) {
+    } catch (error) {
       console.log(error);
-      toast.error(error.message);
+      toast.error((error as Error).message);
     }
   };
 

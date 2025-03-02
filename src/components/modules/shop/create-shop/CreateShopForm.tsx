@@ -49,7 +49,7 @@ const CreateShopForm = () => {
       if (res.success) {
         toast.success(res.message);
       }
-    } catch (err: any) {
+    } catch (err) {
       console.error(err);
     }
   };

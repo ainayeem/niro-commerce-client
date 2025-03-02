@@ -26,7 +26,7 @@ export default function FilterSidebar() {
         const [{ data: categoriesData }, { data: brandsData }] = await Promise.all([getAllCategories(), getAllBrands()]);
         setCategories(categoriesData);
         setBrands(brandsData);
-      } catch (error: any) {
+      } catch (error) {
         console.error(error);
         toast.error("Failed to fetch filters");
       } finally {

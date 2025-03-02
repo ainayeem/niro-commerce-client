@@ -6,7 +6,7 @@ import { ICategory } from "@/types";
 import Link from "next/link";
 
 const Category = async () => {
-  const { data: categories } = await getAllCategories();
+  const { data: categories = [] } = await getAllCategories();
   return (
     <NCContainer>
       <div className="container mx-auto my-20">
@@ -19,8 +19,8 @@ const Category = async () => {
           </Link>
         </div>
         <div className="grid grid-cols-6 gap-8 my-5">
-          {categories.map((category: ICategory, idx: number) => (
-            <CategoryCard key={idx} category={category} />
+          {categories.map((category: ICategory) => (
+            <CategoryCard key={category._id} category={category} />
           ))}
         </div>
       </div>

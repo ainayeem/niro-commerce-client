@@ -126,7 +126,7 @@ export default function UpdateProductForm({ product }: { product: IProduct }) {
       } else {
         toast.error(res.message);
       }
-    } catch (err: any) {
+    } catch (err) {
       console.error(err);
     }
   };

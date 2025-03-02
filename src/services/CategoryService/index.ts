@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use server";
 
 import { getValidToken } from "@/lib/verifyAccessToken";
@@ -19,8 +20,8 @@ export const createCategory = async (data: FormData) => {
     revalidateTag("CATEGORY");
 
     return res.json();
-  } catch (error: any) {
-    return Error(error);
+  } catch (error) {
+    return Error((error as Error).message);
   }
 };
 
@@ -34,8 +35,8 @@ export const getAllCategories = async () => {
     });
 
     return res.json();
-  } catch (error: any) {
-    return Error(error);
+  } catch (error) {
+    return Error((error as Error).message);
   }
 };
 
@@ -52,7 +53,7 @@ export const deleteCategory = async (categoryId: string): Promise<any> => {
     });
     revalidateTag("CATEGORY");
     return res.json();
-  } catch (error: any) {
-    return Error(error);
+  } catch (error) {
+    return Error((error as Error).message);
   }
 };

@@ -17,8 +17,8 @@ export const createOrder = async (order: IOrder) => {
     });
 
     return await res.json();
-  } catch (error: any) {
-    return Error(error);
+  } catch (error) {
+    return Error((error as Error).message);
   }
 };
 
@@ -36,7 +36,7 @@ export const addCoupon = async (couponCode: string, subTotal: number, shopId: st
     });
 
     return await res.json();
-  } catch (error: any) {
-    return Error(error);
+  } catch (error) {
+    return Error((error as Error).message);
   }
 };

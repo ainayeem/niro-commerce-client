@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use server";
 import { getValidToken } from "@/lib/verifyAccessToken";
 import { revalidateTag } from "next/cache";
@@ -12,8 +13,8 @@ export const getAllBrands = async () => {
     });
     const data = await res.json();
     return data;
-  } catch (error: any) {
-    return Error(error.message);
+  } catch (error) {
+    return Error((error as Error).message);
   }
 };
 
@@ -30,8 +31,8 @@ export const createBrand = async (brandData: FormData): Promise<any> => {
     });
     revalidateTag("Brands");
     return res.json();
-  } catch (error: any) {
-    return Error(error);
+  } catch (error) {
+    return Error((error as Error).message);
   }
 };
 
@@ -47,7 +48,7 @@ export const deleteBrand = async (brandId: string): Promise<any> => {
     });
     revalidateTag("Brands");
     return res.json();
-  } catch (error: any) {
-    return Error(error);
+  } catch (error) {
+    return Error((error as Error).message);
   }
 };
