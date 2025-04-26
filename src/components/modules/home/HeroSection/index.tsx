@@ -8,10 +8,9 @@ const HeroSection = () => {
       <div className={`${styles.banner} border-2 border-white rounded-3xl mt-10`}>
         <div className="grid grid-cols-2 gap-4 items-center">
           <div className="pl-12 pt-16">
-            <h1 className="text-5xl font-bold leading-normal text-white">
-              Don&apos;t Miss Out on <br /> These Unbeatable Black <br /> Friday Deals!
-            </h1>
-            <p className="my-3 text-xl text-[#315104]">
+            <p className="text-3xl font-bold leading-normal text-white">Don&apos;t Miss Out on These Unbeatable</p>
+            <h1 className="text-7xl font-bold text-white -ml-1">Black Friday Deals!</h1>
+            <p className="my-3 text-lg text-white">
               Save big this Black Friday with unbeatable deals on tech, home essentials, fashion, and more! Limited stock.
             </p>
 
