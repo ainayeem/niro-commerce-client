@@ -109,3 +109,17 @@ export const deleteProduct = async (productId: string): Promise<any> => {
     return Error((error as Error).message);
   }
 };
+
+export const searchProducts = async (searchTerm: string) => {
+  try {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/product?limit=5&page=1&searchTerm=${encodeURIComponent(searchTerm)}`, {
+      next: {
+        tags: ["PRODUCT"],
+      },
+    });
+    return await res.json();
+  } catch (error: any) {
+    console.error("Search error:", error);
+    return { data: [] };
+  }
+};

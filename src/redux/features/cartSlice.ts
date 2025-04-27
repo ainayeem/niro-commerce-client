@@ -135,6 +135,11 @@ const cartSlice = createSlice({
 });
 
 //* products
+
+export const orderedProductsSelector = (state: RootState) => {
+  return state.cart.products;
+};
+
 export const cartProductsSelector = (state: RootState) => {
   return state.cart.products;
 };
