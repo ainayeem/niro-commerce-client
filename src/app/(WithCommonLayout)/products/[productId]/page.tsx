@@ -9,7 +9,7 @@ const ProductDetailsPage = async ({ params }: { params: Promise<{ productId: str
   const { data: product } = await getSingleProduct(productId);
 
   return (
-    <NCContainer>
+    <NCContainer className="">
       <ProductBanner title="Product Details" path="Home - Products - Product Details" />
       <ProductDetails product={product} />
     </NCContainer>

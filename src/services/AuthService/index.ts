@@ -115,3 +115,7 @@ export const getNewAccessToken = async () => {
     return Error((error as Error).message);
   }
 };
+
+export const logoutUser = async () => {
+  (await cookies()).delete("accessToken");
+};
