@@ -51,7 +51,7 @@ const Navbar = ({ className, logoOnly = false, hideSearch = false, transparent =
         <Link href="/">
           <h1 className="text-2xl flex items-center gap-2 font-bold text-emerald-600">
             <Logo />
-            Nirocom
+            <span className="hidden md:block">Nirocom</span>
           </h1>
         </Link>
 

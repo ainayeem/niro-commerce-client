@@ -90,7 +90,7 @@ const SearchBar = () => {
                 onChange={(e) => setQuery(e.target.value)}
                 onKeyDown={handleKeyPress}
                 onClick={() => setOpen(true)}
-                className="w-full h-12 rounded-xl border border-gray-200 bg-white py-2 pl-12 pr-4 text-base shadow-sm transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-300 focus-visible:border-emerald-300 group-hover:border-emerald-200 group-hover:shadow-md"
+                className="w-full h-12  border border-gray-200 bg-white py-2 pl-12 pr-4 text-base shadow-sm transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-300 focus-visible:border-emerald-300 group-hover:border-emerald-200 group-hover:shadow-md rounded-full"
               />
               {query && (
                 <Button

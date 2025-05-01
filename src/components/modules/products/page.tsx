@@ -18,6 +18,15 @@ interface AllProductsProps {
 const AllProducts = ({ products, meta }: AllProductsProps) => {
   const [isFilterOpen, setIsFilterOpen] = useState(false);
 
+  const shuffleArray = (array: unknown[]): unknown[] => {
+    const newArray: unknown[] = [...array];
+    for (let i: number = newArray.length - 1; i > 0; i--) {
+      const j: number = Math.floor(Math.random() * (i + 1));
+      [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
+    }
+    return newArray;
+  };
+
   return (
     <div className="container mx-auto px-4 py-6">
       {/* Mobile Filter Button */}
@@ -49,8 +58,16 @@ const AllProducts = ({ products, meta }: AllProductsProps) => {
           {products.length > 0 ? (
             <>
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-5">
-                {products?.map((product) => (
-                  <ProductCard key={product._id} product={product} />
+                {(
+                  shuffleArray(
+                    products.flatMap((product) =>
+                      Array(6)
+                        .fill(null)
+                        .map((_, i) => ({ ...product, uniqueKey: `${product._id}-${i}` }))
+                    )
+                  ) as (IProduct & { uniqueKey: string })[]
+                ).map((product) => (
+                  <ProductCard key={product.uniqueKey} product={product} />
                 ))}
               </div>
               <div className="mt-8">
