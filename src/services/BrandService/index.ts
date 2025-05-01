@@ -4,17 +4,16 @@ import { getValidToken } from "@/lib/verifyAccessToken";
 import { revalidateTag } from "next/cache";
 
 //  get all brands
-export const getAllBrands = async () => {
+export const getAllBrands = async (page?: string, limit?: string) => {
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/brand`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/brand?limit=${limit}&page=${page}`, {
       next: {
-        tags: ["Brands"],
+        tags: ["BRAND"],
       },
     });
-    const data = await res.json();
-    return data;
-  } catch (error) {
-    return Error((error as Error).message);
+    return res.json();
+  } catch (error: any) {
+    return Error(error.message);
   }
 };
 

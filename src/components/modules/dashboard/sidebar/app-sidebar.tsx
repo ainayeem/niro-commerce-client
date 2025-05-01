@@ -2,7 +2,7 @@
 
 import Logo from "@/assets/svgs/Logo";
 import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from "@/components/ui/sidebar";
-import { Bot, Frame, LifeBuoy, Map, PieChart, Send } from "lucide-react";
+import { Frame, LayoutDashboardIcon, LifeBuoy, Map, PieChart, Send, StoreIcon } from "lucide-react";
 import Link from "next/link";
 import * as React from "react";
 import { NavMain } from "./nav-main";
@@ -10,17 +10,21 @@ import { NavUser } from "./nav-user";
 
 const data = {
   navMain: [
-    // {
-    //   title: "Dashboard",
-    //   url: "/user/dashboard",
-    //   icon: SquareTerminal,
-    //   isActive: true,
-    // },
+    {
+      title: "Dashboard",
+      url: "/user/dashboard",
+      icon: LayoutDashboardIcon,
+      isActive: true,
+    },
     {
       title: "Shop",
       url: "/user/shop/products",
-      icon: Bot,
+      icon: StoreIcon,
       items: [
+        {
+          title: "My Shop",
+          url: "/user/shop/my-shop",
+        },
         {
           title: "Manage Products",
           url: "/user/shop/products",
@@ -32,6 +36,10 @@ const data = {
         {
           title: "Manage Brands",
           url: "/user/shop/brand",
+        },
+        {
+          title: "Manage Coupon",
+          url: "/user/shop/manage-coupon",
         },
       ],
     },

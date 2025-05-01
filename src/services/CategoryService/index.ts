@@ -26,17 +26,17 @@ export const createCategory = async (data: FormData) => {
 };
 
 //get all categories
-export const getAllCategories = async () => {
+export const getAllCategories = async (page?: string, limit?: string) => {
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/category?limit=12`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/category?limit=${limit}&page=${page}`, {
       next: {
         tags: ["CATEGORY"],
       },
     });
 
     return res.json();
-  } catch (error) {
-    return Error((error as Error).message);
+  } catch (error: any) {
+    return Error(error);
   }
 };
 

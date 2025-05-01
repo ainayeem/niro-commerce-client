@@ -64,6 +64,33 @@ export default function LoginForm() {
     }
   };
 
+  // Handle Demo Login functionality
+  const handleDemoLogin = (userType: "user" | "shopOwner" | "admin") => {
+    let demoCredentials = {
+      email: "",
+      password: "",
+    };
+
+    // Set demo credentials based on user type
+    if (userType === "user") {
+      demoCredentials = { email: "rakib@example.com", password: "123456" };
+    } else if (userType === "shopOwner") {
+      demoCredentials = { email: "user@test.com", password: "123456789" };
+    } else if (userType === "admin") {
+      demoCredentials = {
+        email: "mrshakilhossain@outlook.com",
+        password: "admin123",
+      };
+    }
+
+    // Set the form values to the demo credentials and submit
+    form.setValue("email", demoCredentials.email);
+    form.setValue("password", demoCredentials.password);
+
+    // Trigger form submission
+    form.handleSubmit(onSubmit)();
+  };
+
   return (
     <div className="border-2 border-gray-300 rounded-xl flex-grow max-w-md w-full p-5">
       <div className="flex items-center space-x-4 ">
@@ -102,8 +129,20 @@ export default function LoginForm() {
             )}
           />
 
-          <div className="flex mt-3 w-full">
+          <div className="flex mt-3 w-full flex-col">
             <ReCAPTCHA sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_CLIENT_KEY!} onChange={handleReCaptcha} className="mx-auto" />
+
+            <div className="mt-4 flex flex-col gap-2">
+              {/* <Button size="sm" onClick={() => handleDemoLogin("user")}>
+                Demo User Login
+              </Button> */}
+              <Button size="sm" variant="destructive" onClick={() => handleDemoLogin("shopOwner")}>
+                Demo user Login
+              </Button>
+              {/* <Button size="sm" variant="secondary" onClick={() => handleDemoLogin("admin")}>
+                Demo Admin Login
+              </Button> */}
+            </div>
           </div>
 
           <Button disabled={reCaptchaStatus ? false : true} type="submit" className="mt-5 w-full">

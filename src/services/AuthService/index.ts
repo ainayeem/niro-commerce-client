@@ -1,5 +1,6 @@
 "use server";
 
+import { getValidToken } from "@/lib/verifyAccessToken";
 import { jwtDecode } from "jwt-decode";
 import { cookies } from "next/headers";
 import { FieldValues } from "react-hook-form";
@@ -118,4 +119,21 @@ export const getNewAccessToken = async () => {
 
 export const logoutUser = async () => {
   (await cookies()).delete("accessToken");
+};
+
+export const changePassword = async (data: FieldValues) => {
+  const token = await getValidToken();
+  try {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/auth/change-password`, {
+      method: "POST",
+      headers: {
+        Authorization: token,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+    return res.json();
+  } catch (error) {
+    return new Error((error as Error).message);
+  }
 };
