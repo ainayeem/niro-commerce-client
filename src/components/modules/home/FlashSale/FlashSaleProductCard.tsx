@@ -1,10 +1,9 @@
 "use client";
 import { Badge } from "@/components/ui/badge";
-import type React from "react";
-
 import { Card } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
 import { addProduct } from "@/redux/features/cartSlice";
+import type React from "react";
 // import { addToWishlist } from "@/redux/features/wishListSlice";
 import { useAppDispatch } from "@/redux/hooks";
 import type { IProduct } from "@/types/product";

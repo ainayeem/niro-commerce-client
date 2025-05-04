@@ -2,8 +2,9 @@
 
 import DeleteConfirmationModal from "@/components/ui/core/NCModal/DeleteConfirmationModal";
 import { NCTable } from "@/components/ui/core/NCTable";
+import TablePagination from "@/components/ui/core/NCTable/TablePagination";
 import { deleteCategory } from "@/services/CategoryService";
-import { ICategory } from "@/types";
+import { ICategory, IMeta } from "@/types";
 import { ColumnDef } from "@tanstack/react-table";
 import { Trash } from "lucide-react";
 import Image from "next/image";
@@ -13,9 +14,11 @@ import CreateCategoryModal from "./CreateCategoryModal";
 
 type TCategoriesProps = {
   categories: ICategory[];
+  meta: IMeta;
 };
 
-const ManageCategories = ({ categories }: TCategoriesProps) => {
+const ManageCategories = ({ categories, meta }: TCategoriesProps) => {
+  console.log("🚀 ~ ManageCategories ~ meta:", meta);
   const [isModalOpen, setModalOpen] = useState(false);
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [selectedItem, setSelectedItem] = useState<string | null>(null);
@@ -87,6 +90,7 @@ const ManageCategories = ({ categories }: TCategoriesProps) => {
       </div>
       <NCTable data={categories} columns={columns} />
       <DeleteConfirmationModal name={selectedItem} isOpen={isModalOpen} onOpenChange={setModalOpen} onConfirm={handleDeleteConfirm} />
+      <TablePagination totalPage={meta?.totalPage} />
     </div>
   );
 };

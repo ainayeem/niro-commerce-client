@@ -13,7 +13,7 @@ import {
 import { protectedRoutes } from "@/constants";
 import { useUser } from "@/context/UserContext";
 import { logoutUser } from "@/services/AuthService";
-import { Heart, LayoutDashboardIcon, LogOut, ShoppingBag, ShoppingBasket, StoreIcon, TerminalSquare, User } from "lucide-react";
+import { LayoutDashboardIcon, LogOut, ShoppingBag, ShoppingBasket, StoreIcon, TerminalSquare, User } from "lucide-react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 
@@ -102,12 +102,12 @@ const NavUser = () => {
         )}
 
         {/* Mobile-only menu items */}
-        <DropdownMenuItem asChild className="sm:hidden rounded-lg py-2">
+        {/* <DropdownMenuItem asChild className="sm:hidden rounded-lg py-2">
           <Link href="/wishlist" className="cursor-pointer">
             <Heart className="mr-2 h-4 w-4 text-muted-foreground" />
             <span>Wishlist</span>
           </Link>
-        </DropdownMenuItem>
+        </DropdownMenuItem> */}
 
         {!user.hasShop && (
           <DropdownMenuItem asChild className="sm:hidden rounded-lg py-2">
